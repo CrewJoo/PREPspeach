@@ -1,0 +1,146 @@
+"use client";
+
+import { useState } from "react";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Sparkles, AlertCircle } from "lucide-react";
+import Link from "next/link";
+
+// Define the schema to match the API (for type inference if needed, though useObject handles partials)
+const prepSchema = z.object({
+    point1: z.string(),
+    reason: z.string(),
+    example: z.string(),
+    point2: z.string(),
+    advice: z.string(),
+});
+
+export default function TransformPage() {
+    const [input, setInput] = useState("");
+
+    const { object, submit, isLoading, error } = useObject({
+        api: "/api/transform",
+        schema: prepSchema,
+    });
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!input.trim()) return;
+        submit({ input });
+    };
+
+    // 'object' contains the partial object as it streams in
+    const parsedData = object;
+
+    return (
+        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-6">
+            <div className="w-full max-w-7xl space-y-10">
+                <div className="text-center space-y-4">
+                    <h1 className="text-4xl font-bold text-trust-navy sm:text-5xl">주절이 PREP 변환기</h1>
+                    <p className="text-xl text-gray-600">하고 싶은 말을 마음껏 적으세요. AI가 논리적인 구조로 잡아드립니다.</p>
+                </div>
+
+                <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+                    {/* Input Section */}
+                    <div className="space-y-4">
+                        <div className="rounded-2xl bg-white p-8 shadow-xl">
+                            <h2 className="mb-6 text-2xl font-bold text-gray-800">나의 생각 (비구조화)</h2>
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <Textarea
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    placeholder="예: 저는 성실하고요, 예전에 편의점 알바할 때도 지각 한 번 안 했어요. 그래서 뽑아주시면 열심히 할 자신 있습니다..."
+                                    className="min-h-[400px] text-lg resize-none p-6 leading-relaxed bg-white text-gray-900 border-gray-300 focus:ring-trust-navy"
+                                />
+                                <Button
+                                    type="submit"
+                                    disabled={isLoading || !input.trim()}
+                                    className="w-full bg-trust-navy py-8 text-xl font-bold hover:bg-trust-navy/90 rounded-xl shadow-lg transition-transform active:scale-95 text-white"
+                                >
+                                    {isLoading ? (
+                                        <span className="flex items-center gap-3">
+                                            <Sparkles className="animate-spin h-6 w-6" /> 구조화 분석 중...
+                                        </span>
+                                    ) : (
+                                        <span className="flex items-center gap-3">
+                                            <Sparkles className="h-6 w-6" /> PREP으로 변환하기
+                                        </span>
+                                    )}
+                                </Button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {/* Output Section */}
+                    <div className="space-y-4">
+                        <div className="h-full min-h-[600px] rounded-2xl bg-white p-8 shadow-xl flex flex-col">
+                            <h2 className="mb-6 text-2xl font-bold text-gray-800">변환 결과 (PREP)</h2>
+
+                            {error && (
+                                <div className="flex items-center gap-3 rounded-xl bg-red-50 p-6 text-red-600 text-lg">
+                                    <AlertCircle className="h-6 w-6" />
+                                    <p>오류가 발생했습니다. 다시 시도해주세요.</p>
+                                </div>
+                            )}
+
+                            {!parsedData && !isLoading && !error && (
+                                <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-gray-200 text-xl text-gray-400">
+                                    왼쪽에서 내용을 입력하고 버튼을 눌러보세요.
+                                </div>
+                            )}
+
+                            {isLoading && !parsedData && (
+                                <div className="flex flex-1 flex-col items-center justify-center gap-6 text-trust-navy animate-pulse">
+                                    <Sparkles className="h-12 w-12" />
+                                    <p className="text-xl font-medium">논리 구조를 잡고 있습니다...</p>
+                                </div>
+                            )}
+
+                            {parsedData && (
+                                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500 flex-1 overflow-y-auto">
+                                    <div className="space-y-4">
+                                        <div className="rounded-xl bg-blue-50 p-5 shadow-sm border border-blue-100">
+                                            <span className="font-bold text-trust-navy text-lg block mb-2">Point (결론)</span>
+                                            <p className="text-xl text-gray-900 leading-relaxed">{parsedData.point1}</p>
+                                        </div>
+                                        <div className="rounded-xl bg-gray-50 p-5 shadow-sm border border-gray-100">
+                                            <span className="font-bold text-gray-700 text-lg block mb-2">Reason (이유)</span>
+                                            <p className="text-xl text-gray-900 leading-relaxed">{parsedData.reason}</p>
+                                        </div>
+                                        <div className="rounded-xl bg-gray-50 p-5 shadow-sm border border-gray-100">
+                                            <span className="font-bold text-gray-700 text-lg block mb-2">Example (사례)</span>
+                                            <p className="text-xl text-gray-900 leading-relaxed">{parsedData.example}</p>
+                                        </div>
+                                        <div className="rounded-xl bg-blue-50 p-5 shadow-sm border border-blue-100">
+                                            <span className="font-bold text-trust-navy text-lg block mb-2">Point (요약)</span>
+                                            <p className="text-xl text-gray-900 leading-relaxed">{parsedData.point2}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-8 border-t pt-6">
+                                        <h3 className="mb-4 text-xl font-bold text-success-green flex items-center gap-2">
+                                            <Sparkles className="h-5 w-5" /> AI 코칭 조언
+                                        </h3>
+                                        <p className="text-gray-700 text-lg leading-relaxed bg-green-50 p-6 rounded-xl border border-green-100 shadow-sm">
+                                            {parsedData.advice}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex justify-center mt-12 mb-8">
+                    <Link href="/">
+                        <Button variant="ghost" size="lg" className="text-lg text-gray-500 hover:text-gray-900">
+                            ← 홈으로 돌아가기
+                        </Button>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+}
