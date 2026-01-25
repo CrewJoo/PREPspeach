@@ -18,6 +18,12 @@ export function WizardLayout({ children, title, description }: WizardLayoutProps
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full max-w-4xl text-center"
             >
+                <div className="mb-8 flex justify-start">
+                    <a href="/" className="text-gray-400 hover:text-trust-navy transition-colors flex items-center gap-2">
+                        ← 홈으로
+                    </a>
+                </div>
+
                 <h2 className="mb-4 text-4xl font-bold text-trust-navy">{title}</h2>
                 {description && (
                     <p className="mb-10 text-xl text-gray-500">{description}</p>

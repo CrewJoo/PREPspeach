@@ -5,7 +5,13 @@ import { z } from 'zod';
 const feedbackSchema = z.object({
   feedback: z.string().describe("지원자 답변에 대한 날카로운 지적과 수정 제안"),
   script: z.string().describe("면접장에서 그대로 읽을 수 있는 1분 길이의 다듬어진 스크립트"),
-  coaching: z.string().describe("P-R-E-P 각 단계별로 구체적으로 어떻게 개선해야 하는지에 대한 상세 코칭 (예: Point는 두괄식으로, Reason은 수치를 포함해서 등)")
+  coaching: z.string().describe("P-R-E-P 각 단계별로 구체적으로 어떻게 개선해야 하는지에 대한 상세 코칭"),
+  improved_prep: z.object({
+    point1: z.string().describe("개선된 결론 (P)"),
+    reason: z.string().describe("개선된 이유 (R)"),
+    example: z.string().describe("개선된 사례 (E)"),
+    point2: z.string().describe("개선된 재강조 (P)")
+  }).describe("지원자의 초안을 바탕으로 더 논리적이고 임팩트 있게 재구성한 PREP 구조")
 });
 
 export async function POST(req: Request) {
@@ -22,9 +28,10 @@ export async function POST(req: Request) {
   당신은 15년차 대기업 채용 전문가이자 '독설가' 면접관입니다. 
   
   지시사항:
-  1. [feedback] 필드에는 부족한 점을 날카롭게 지적하고 어떻게 고쳐야 할지 제안하세요.
-  2. [script] 필드에는 합격할 수 있는 수준으로 다듬어진 완성된 스크립트를 작성하세요.
-  3. [coaching] 필드에는 PREP 각 단계(P, R, E, P)별로 구체적인 개선 팁을 제공하세요.
+  1. [feedback] 필드: 부족한 점을 날카롭게 지적하고 해결책 제시
+  2. [script] 필드: 합격 가능한 수준의 1분 스피킹용 스크립트 작성
+  3. [coaching] 필드: P-R-E-P 각 단계별 구체적인 개선 팁 제공
+  4. [improved_prep] 필드: 지원자의 초안을 바탕으로 완벽하게 다듬어진 PREP 구조(Point, Reason, Example, Point)를 새로 작성하세요. 내용이 빈약하면 논리를 보강하십시오.
   
   말투는 정중하지만 내용은 직설적이어야 합니다.
   `;

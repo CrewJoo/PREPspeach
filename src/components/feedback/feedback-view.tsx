@@ -5,13 +5,19 @@ import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { z } from "zod";
 import { usePrepStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
-import { Volume2, Lock, AlertCircle, PlayCircle, GraduationCap } from "lucide-react";
+import { Volume2, Lock, AlertCircle, PlayCircle, GraduationCap, Sparkles } from "lucide-react";
 
 // Schema for type inference
 const feedbackSchema = z.object({
     feedback: z.string(),
     script: z.string(),
     coaching: z.string(),
+    improved_prep: z.object({
+        point1: z.string(),
+        reason: z.string(),
+        example: z.string(),
+        point2: z.string(),
+    }).optional(),
 });
 
 export function FeedbackView() {
@@ -127,6 +133,34 @@ export function FeedbackView() {
                             <p className="text-gray-800 leading-relaxed text-lg whitespace-pre-wrap bg-white p-6 rounded-xl shadow-sm">
                                 {object.coaching}
                             </p>
+                        </div>
+                    )}
+
+                    {/* Improved PREP Section (New) */}
+                    {showCoaching && object?.improved_prep && (
+                        <div className="rounded-2xl bg-indigo-50 p-8 border border-indigo-100 animate-in fade-in zoom-in-95 duration-500 delay-100">
+                            <h4 className="flex items-center gap-2 font-bold text-xl text-trust-navy mb-6">
+                                <Sparkles className="h-6 w-6 text-indigo-600" />
+                                업그레이드된 PREP 초안
+                            </h4>
+                            <div className="space-y-4">
+                                <div className="bg-white p-5 rounded-xl border border-indigo-100 shadow-sm">
+                                    <span className="block font-bold text-indigo-600 mb-1">Point (결론)</span>
+                                    <p className="text-gray-900 text-lg">{object.improved_prep.point1}</p>
+                                </div>
+                                <div className="bg-white p-5 rounded-xl border border-indigo-100 shadow-sm">
+                                    <span className="block font-bold text-gray-500 mb-1">Reason (이유)</span>
+                                    <p className="text-gray-900 text-lg">{object.improved_prep.reason}</p>
+                                </div>
+                                <div className="bg-white p-5 rounded-xl border border-indigo-100 shadow-sm">
+                                    <span className="block font-bold text-gray-500 mb-1">Example (사례)</span>
+                                    <p className="text-gray-900 text-lg">{object.improved_prep.example}</p>
+                                </div>
+                                <div className="bg-white p-5 rounded-xl border border-indigo-100 shadow-sm">
+                                    <span className="block font-bold text-indigo-600 mb-1">Point (재강조)</span>
+                                    <p className="text-gray-900 text-lg">{object.improved_prep.point2}</p>
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>
