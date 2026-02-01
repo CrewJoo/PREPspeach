@@ -28,7 +28,7 @@ export default function AboutPrepPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-                    {LANDING_COPY.solution.steps.map((step, idx) => (
+                    {LANDING_COPY.PREP_PAGE_COPY.steps.map((step, idx) => (
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, scale: 0.9 }}

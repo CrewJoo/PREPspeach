@@ -2,6 +2,32 @@ export const LANDING_COPY = {
     // 0. Navigation Slogan
     nav_slogan: "생각의 공식 PREP",
 
+    // PREP Details Page Content (Restored Original)
+    PREP_PAGE_COPY: {
+        steps: [
+            {
+                step: "P",
+                name: "Point",
+                desc: "결론부터 강력하게 던지세요.",
+            },
+            {
+                step: "R",
+                name: "Reason",
+                desc: "타당한 이유로 설득하세요.",
+            },
+            {
+                step: "E",
+                name: "Example",
+                desc: "경험과 증거로 증명하세요.",
+            },
+            {
+                step: "P",
+                name: "Point",
+                desc: "다시 한 번 각인시키세요.",
+            },
+        ]
+    },
+
     // 1. Desire (욕구): PREP 솔루션 제시 (B = M + A + T) -> Moved to Top as requested
     solution: {
         title: "당신의 프롬프트 작성 '원칙'은?",

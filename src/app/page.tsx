@@ -57,10 +57,6 @@ export default function Home() {
             {LANDING_COPY.solution.steps.map((step, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
                 className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white p-6 hover:shadow-xl transition-shadow"
               >
                 <div className="flex items-center gap-4 mb-4">

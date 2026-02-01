@@ -20,28 +20,28 @@ export default function AboutAisperPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-white rounded-3xl p-8 sm:p-12 shadow-2xl border border-trust-navy/10 text-center max-w-4xl mx-auto relative overflow-hidden mb-16"
+                    className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-trust-navy/10 text-center max-w-4xl mx-auto relative overflow-hidden mb-12"
                 >
                     {/* Decorative background for emphasis */}
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-white to-blue-50 opacity-50 z-0" />
 
                     <div className="relative z-10">
                         {/* Enlarged Badge/Title */}
-                        <span className="inline-block px-10 py-5 rounded-full bg-trust-navy text-white font-black text-4xl sm:text-6xl mb-10 shadow-xl tracking-tight">
+                        <span className="inline-block px-6 py-3 rounded-full bg-trust-navy text-white font-black text-xl sm:text-3xl mb-8 shadow-xl tracking-tight">
                             PREP Aisper란?
                         </span>
-                        <h2 className="text-3xl sm:text-5xl text-gray-900 font-extrabold leading-relaxed whitespace-pre-wrap break-keep">
+                        <h2 className="text-2xl sm:text-4xl text-gray-900 font-extrabold leading-relaxed whitespace-pre-wrap break-keep">
                             "생각의 도구 PREP으로<br />인공지능을 주도하는 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">논리 지휘자</span>"
                         </h2>
                     </div>
                 </motion.div>
 
                 {/* Section 2 (Formerly Section 1): Aisper Header - NOW MIDDLE/BOTTOM, LARGER */}
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-700 mb-6">
+                <div className="text-center mb-10">
+                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-700 mb-4">
                         Aisper (아이스퍼)란?
                     </h1>
-                    <p className="text-2xl sm:text-3xl text-slate-500 font-medium whitespace-pre-wrap break-keep leading-relaxed">
+                    <p className="text-lg sm:text-xl text-slate-500 font-medium whitespace-pre-wrap break-keep leading-relaxed">
                         AI를 다루는 '영적인 한 수'를 가진 논리 지휘자
                     </p>
                 </div>
