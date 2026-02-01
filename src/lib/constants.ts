@@ -31,7 +31,7 @@ export const LANDING_COPY = {
 
     // 2-1. Hero Part 1 (Intro): 상단 소개 그룹
     hero_intro: {
-        badge: "PREP Aisper(AI 논리 지휘자) 양성 시스템",
+        badge: "PREP Aisper 양성 시스템",
         title: "프롬프트 공식 *PREP*\nAI 보다 한·수·위, *Aisper*",
         //subtitle: "두서없는 경험담을 합격하는 스크립트로.\nThinkPREP이 당신의 답변을 구조화해 드립니다.",
     },
