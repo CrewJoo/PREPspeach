@@ -99,12 +99,7 @@ export default function Home() {
             <span className="block sm:inline">{renderTitle(LANDING_COPY.hero_intro.title)}</span>
           </motion.h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="max-w-2xl whitespace-pre-wrap text-lg text-gray-500 sm:text-2xl"
-          >
-            {LANDING_COPY.hero_intro.subtitle}
-          </motion.p>
+
 
           <motion.div variants={itemVariants} className="mt-8 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link href="/about/prep" className="w-full sm:w-auto">
