@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Sparkles, AlertCircle } from "lucide-react";
-import Link from "next/link";
+import { HomeButton } from "@/components/common/home-button";
 
 // Define the schema to match the API (for type inference if needed, though useObject handles partials)
 const prepSchema = z.object({
@@ -35,10 +35,11 @@ export default function TransformPage() {
     const parsedData = object;
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-6">
-            <div className="w-full max-w-7xl space-y-10">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 p-6 relative">
+            <HomeButton />
+            <div className="w-full max-w-7xl space-y-10 py-12">
                 <div className="text-center space-y-4">
-                    <h1 className="text-4xl font-bold text-trust-navy sm:text-5xl">주절이 PREP 변환기</h1>
+                    <h1 className="text-4xl font-bold text-trust-navy sm:text-5xl">주저리 PREP 변환기</h1>
                     <p className="text-xl text-gray-600">하고 싶은 말을 마음껏 적으세요. AI가 논리적인 구조로 잡아드립니다.</p>
                 </div>
 
@@ -131,14 +132,6 @@ export default function TransformPage() {
                             )}
                         </div>
                     </div>
-                </div>
-
-                <div className="flex justify-center mt-12 mb-8">
-                    <Link href="/">
-                        <Button variant="ghost" size="lg" className="text-lg text-gray-500 hover:text-gray-900">
-                            ← 홈으로 돌아가기
-                        </Button>
-                    </Link>
                 </div>
             </div>
         </div>

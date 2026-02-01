@@ -19,12 +19,15 @@ export function StepReason() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2 text-left">
-                <label className="text-sm font-medium text-gray-700">이유 (Reason)</label>
-                <p className="text-xs text-gray-500">막연한 감정이 아닌, 논리적인 인과관계를 설명해주세요.</p>
+                <label className="text-sm font-medium text-gray-700">이유/근거 (Reason)</label>
+                <div className="rounded-md bg-gray-50 p-3 text-sm text-gray-700">
+                    <p className="font-semibold">💡 Tip: 주관적 감정보다는 '객관적 사실'을.</p>
+                    <p className="mt-1 text-xs opacity-80">왜 그렇게 생각하시나요? 상대방이 납득할 수 있는 구체적인 근거를 제시해주세요.</p>
+                </div>
                 <Textarea
                     {...register("reason", { required: "필수 입력 항목입니다." })}
-                    placeholder="예: 왜냐하면 저는 [구체적 직무 경험]을 통해 [관련 성과]를 지속적으로 만들어왔기 때문입니다."
-                    className="h-32 text-lg"
+                    placeholder="작성 예시: 왜냐하면 지난 [기간] 동안 [관련 경험]을 수행하며 [구체적 성과 수치]를 달성했기 때문입니다."
+                    className="h-32 text-lg focus:ring-trust-navy"
                 />
                 {errors.reason && (
                     <span className="text-sm text-red-500">{errors.reason.message}</span>

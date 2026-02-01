@@ -20,11 +20,14 @@ export function StepPointRe() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2 text-left">
                 <label className="text-sm font-medium text-gray-700">마무리 결론 (Point)</label>
-                <p className="text-xs text-gray-500">앞선 주장과 근거를 요약하며 입사 후 포부를 밝히세요.</p>
+                <div className="rounded-md bg-blue-50 p-3 text-sm text-blue-700">
+                    <p className="font-semibold">💡 Tip: 수미상관으로 완벽하게.</p>
+                    <p className="mt-1 text-xs opacity-90">앞선 주장과 근거를 한 문장으로 요약하며, 포부와 함께 마무리하세요.</p>
+                </div>
                 <Textarea
                     {...register("point2", { required: "필수 입력 항목입니다." })}
-                    placeholder="예: 따라서 저는 입사 후에도 이러한 역량을 바탕으로 귀사의 성장에 기여하겠습니다."
-                    className="h-32 text-lg"
+                    placeholder="작성 예시: 이러한 강점을 바탕으로, 입사 후 [구체적 기간] 내에 [구체적 목표]를 달성하는 인재가 되겠습니다."
+                    className="h-32 text-lg focus:ring-trust-navy"
                 />
                 {errors.point2 && (
                     <span className="text-sm text-red-500">{errors.point2.message}</span>

@@ -1,12 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { ProgramGuideModal } from "@/components/common/program-guide-modal";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { LANDING_COPY, COLORS } from "@/lib/constants";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function Home() {
+  const [showGuide, setShowGuide] = useState(false);
+
+  const renderTitle = (text: string) => {
+    return text.split("*").map((part, index) => (
+      index % 2 === 1 ? <span key={index} className="text-gray-900">{part}</span> : part
+    ));
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -23,95 +33,20 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col overflow-hidden bg-white">
       {/* Header / Logo */}
-      <nav className="absolute top-0 left-0 z-50 w-full p-6 sm:p-10">
-        <div className="flex items-center justify-between">
+      <nav className="absolute top-0 left-0 z-50 w-full p-4 sm:p-10">
+        <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-0">
           <Link href="/" className="group flex items-center gap-1">
-            <span className="text-3xl font-black tracking-tighter text-trust-navy">PREP</span>
-            <span className="text-3xl font-light text-gray-400 group-hover:text-success-green transition-colors">speach</span>
+            <span className="text-2xl font-black tracking-tighter text-trust-navy sm:text-3xl">PREP</span>
+            <span className="text-2xl font-light text-gray-400 group-hover:text-success-green transition-colors sm:text-3xl">Aisper</span>
             <span className="ml-1 h-2 w-2 rounded-full bg-success-green animate-pulse" />
           </Link>
+          <span className="text-sm font-medium text-gray-400 sm:text-base">면접 답변, 이제 PREP으로 구조화하세요.</span>
         </div>
       </nav>
 
-      {/* 1. Attention (Hero Section) */}
-      <section className="relative flex min-h-[90vh] flex-col items-center justify-center px-4 pt-20 text-center">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-white to-white" />
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="flex max-w-4xl flex-col items-center gap-8"
-        >
-          <motion.div variants={itemVariants}>
-            <span className="rounded-full bg-red-600 px-6 py-2 text-lg font-bold text-white shadow-lg">
-              {LANDING_COPY.hero.badge}
-            </span>
-          </motion.div>
-
-          <motion.h1
-            variants={itemVariants}
-            className="whitespace-pre-wrap break-keep text-5xl font-bold tracking-tight text-gray-400 sm:text-6xl lg:text-7xl"
-          >
-            <span className="whitespace-nowrap">면접관은 당신의 화려한 <span className="text-gray-900">'스펙'</span>보다</span><br />
-            <span className="text-gray-900">'논리적인 1분'</span>을 기억합니다.
-          </motion.h1>
-
-          <motion.p
-            variants={itemVariants}
-            className="max-w-2xl whitespace-pre-wrap text-xl text-gray-500 sm:text-2xl"
-          >
-            {LANDING_COPY.hero.subtitle}
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <Link href="/prep">
-              <Button size="lg" className="h-16 w-full sm:w-auto bg-success-green px-8 text-xl font-bold hover:bg-success-green/90 shadow-xl shadow-success-green/20 transition-all hover:scale-105">
-                {LANDING_COPY.hero.ctaStep}
-                <ArrowRight className="ml-2 h-6 w-6" />
-              </Button>
-            </Link>
-            <Link href="/transform">
-              <Button size="lg" className="h-16 w-full sm:w-auto bg-purple-900 px-8 text-xl font-bold text-white hover:bg-purple-800 shadow-xl transition-all hover:scale-105">
-                {LANDING_COPY.hero.ctaTransform}
-                <ArrowRight className="ml-2 h-6 w-6" />
-              </Button>
-            </Link>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* 2. Interest (Problem Awareness) */}
-      <section className="bg-gray-50 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-trust-navy sm:text-4xl">
-              {LANDING_COPY.problem.title}
-            </h2>
-          </div>
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3">
-            {LANDING_COPY.problem.cards.map((card, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.2 }}
-                className="flex flex-col items-center rounded-2xl bg-white p-8 shadow-lg ring-1 ring-gray-200/50"
-              >
-                <span className="text-5xl mb-6">{card.emoji}</span>
-                <h3 className="text-xl font-bold text-gray-900">{card.title}</h3>
-                <p className="mt-4 text-center text-base text-gray-600 leading-relaxed">
-                  {card.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Desire (Solution / PREP Method) */}
-      <section className="py-24 sm:py-32">
+      {/* 1. Solution (PREP Method) - MOVED TO TOP */}
+      <section className="pt-32 pb-16 sm:pt-40 sm:pb-20 relative">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-50 via-white to-white opacity-70" />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-trust-navy sm:text-4xl">
@@ -142,7 +77,141 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Action (Final CTA) */}
+      {/* 2. Hero Part 1 (First Group) */}
+      <section className="relative flex flex-col items-center justify-center px-4 py-12 text-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="flex max-w-4xl flex-col items-center gap-6 sm:gap-8"
+        >
+          <motion.div variants={itemVariants}>
+            <span className="rounded-full bg-red-600 px-4 py-1.5 text-base font-bold text-white shadow-lg sm:px-6 sm:py-2 sm:text-lg">
+              {LANDING_COPY.hero_intro.badge}
+            </span>
+          </motion.div>
+
+          <motion.h1
+            variants={itemVariants}
+            className="whitespace-pre-wrap break-keep text-4xl font-bold tracking-tight text-gray-400 sm:text-6xl lg:text-7xl"
+          >
+            <span className="block sm:inline">{renderTitle(LANDING_COPY.hero_intro.title)}</span>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="max-w-2xl whitespace-pre-wrap text-lg text-gray-500 sm:text-2xl"
+          >
+            {LANDING_COPY.hero_intro.subtitle}
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="mt-8 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Link href="/about/prep" className="w-full sm:w-auto">
+              <Button size="lg" className="h-16 w-full sm:w-auto px-10 bg-success-green text-xl font-bold hover:bg-success-green/90 shadow-xl shadow-success-green/20 transition-all hover:scale-105">
+                PREP이란?
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </Button>
+            </Link>
+            <Link href="/about/aisper" className="w-full sm:w-auto">
+              <Button size="lg" className="h-16 w-full sm:w-auto px-10 bg-purple-900 text-xl font-bold text-white hover:bg-purple-800 shadow-xl transition-all hover:scale-105">
+                Aisper란?
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </Button>
+            </Link>
+          </motion.div>
+
+          {/* Program Guide Button */}
+          <motion.div variants={itemVariants} className="mt-8">
+            <Button
+              onClick={() => setShowGuide(true)}
+              variant="ghost"
+              size="lg"
+              className="h-auto py-2 px-6 border border-trust-navy/20 text-trust-navy font-semibold hover:bg-trust-navy/5 rounded-full transition-all text-base"
+            >
+              📋 PREP Aisper 프로그램 안내
+            </Button>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* 3. Problem Section (Inserted in Gap) */}
+      <section className="bg-indigo-50/50 pt-24 pb-8 sm:pt-32 sm:pb-8 border-t border-indigo-100">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-trust-navy sm:text-4xl whitespace-pre-wrap break-keep">
+              {LANDING_COPY.problem.title}
+            </h2>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3">
+            {LANDING_COPY.problem.cards.map((card, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="flex flex-col items-center rounded-2xl bg-white p-8 shadow-lg ring-1 ring-indigo-100/50"
+              >
+                <span className="text-5xl mb-6">{card.emoji}</span>
+                <h3 className="text-xl font-bold text-gray-900">{card.title}</h3>
+                <p className="mt-4 text-center text-base text-gray-600 leading-relaxed">
+                  {card.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Hero Part 2 (Second Group) */}
+      <section className="relative flex flex-col items-center justify-center px-4 pt-12 pb-32 text-center bg-indigo-50/50">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="flex max-w-4xl flex-col items-center gap-6 sm:gap-8"
+        >
+          <motion.div variants={itemVariants}>
+            <span className="rounded-full bg-red-600 px-4 py-1.5 text-base font-bold text-white shadow-lg sm:px-6 sm:py-2 sm:text-lg">
+              {LANDING_COPY.hero_practice.badge}
+            </span>
+          </motion.div>
+
+          <motion.h1
+            variants={itemVariants}
+            className="whitespace-pre-wrap break-keep text-4xl font-bold tracking-tight text-gray-400 sm:text-6xl lg:text-7xl"
+          >
+            <span className="block sm:inline">{renderTitle(LANDING_COPY.hero_practice.title)}</span>
+          </motion.h1>
+
+          <motion.p
+            variants={itemVariants}
+            className="max-w-2xl whitespace-pre-wrap text-lg text-gray-500 sm:text-2xl"
+          >
+            {LANDING_COPY.hero_practice.subtitle}
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="mt-8 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <Link href="/prep" className="w-full sm:w-auto">
+              <Button size="lg" className="h-16 w-full sm:w-80 bg-success-green text-xl font-bold hover:bg-success-green/90 shadow-xl shadow-success-green/20 transition-all hover:scale-105">
+                {LANDING_COPY.hero_practice.ctaStep}
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </Button>
+            </Link>
+            <Link href="/transform" className="w-full sm:w-auto">
+              <Button size="lg" className="h-16 w-full sm:w-80 bg-purple-900 text-xl font-bold text-white hover:bg-purple-800 shadow-xl transition-all hover:scale-105">
+                {LANDING_COPY.hero_practice.ctaTransform}
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* 5. Action (Final CTA) */}
       <section className="relative overflow-hidden bg-trust-navy py-24 sm:py-32">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
         <div className="relative mx-auto max-w-7xl px-6 text-center lg:px-8">
@@ -168,6 +237,8 @@ export default function Home() {
         <p>Designed by PREPspeach</p>
         <p className="mt-2">Inspired by Prof. Lim Jae-chun's Logic</p>
       </footer>
+
+      <ProgramGuideModal isOpen={showGuide} onClose={() => setShowGuide(false)} />
     </div>
   );
 }
