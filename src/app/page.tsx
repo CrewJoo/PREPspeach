@@ -40,7 +40,7 @@ export default function Home() {
             <span className="text-2xl font-light text-gray-400 group-hover:text-success-green transition-colors sm:text-3xl">Aisper</span>
             <span className="ml-1 h-2 w-2 rounded-full bg-success-green animate-pulse" />
           </Link>
-          <span className="text-sm font-medium text-gray-400 sm:text-base">면접 답변, 이제 PREP으로 구조화하세요.</span>
+          <span className="text-sm font-medium text-gray-400 sm:text-base">{LANDING_COPY.nav_slogan}</span>
         </div>
       </nav>
 

@@ -1,7 +1,10 @@
 export const LANDING_COPY = {
+    // 0. Navigation Slogan
+    nav_slogan: "생각의 공식 PREP",
+
     // 1. Desire (욕구): PREP 솔루션 제시 (B = M + A + T) -> Moved to Top as requested
     solution: {
-        title: "당신의 프롬프트 작성 Logic은?",
+        title: "당신의 프롬프트 작성 '원칙'은?",
         steps: [
             {
                 step: "M",
