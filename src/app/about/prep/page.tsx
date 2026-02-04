@@ -106,14 +106,14 @@ export default function AboutPrepPage() {
                             마지막 강조(Point)는 강력한 여운을 남깁니다.
                         </p>
                         <p className="pt-4 font-bold text-slate-800">
-                            지금 바로 이 절대적인 생각의 공식을 당신의 것으로 만드세요.
+                            지금 바로 이 절대적인 '생각의 공식'을 당신의 것으로 만들어보세요.
                         </p>
                     </div>
 
                     <div className="mt-12">
                         <Link href="/prep/word-dancing">
                             <Button size="lg" className="bg-trust-navy text-white hover:bg-trust-navy/90 font-bold px-12 h-16 text-xl rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all ring-4 ring-trust-navy/10">
-                                PREP 연습하기
+                                'PREP 워드댄싱' 체험하기
                             </Button>
                         </Link>
                     </div>

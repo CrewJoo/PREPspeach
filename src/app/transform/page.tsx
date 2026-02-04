@@ -102,7 +102,7 @@ export default function TransformPage() {
                                     <Textarea
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
-                                        placeholder="예: 저는 성실하고요, 예전에 편의점 알바할 때도 지각 한 번 안 했어요. 그래서 뽑아주시면 열심히 할 자신 있습니다..."
+                                        placeholder={question ? `[작성 예시]\n${question.guide.example}` : "자유롭게 답변을 작성해 주세요."}
                                         className="min-h-[400px] text-lg resize-none p-6 leading-relaxed bg-white text-gray-900 border-gray-300 focus:ring-trust-navy"
                                     />
                                     <div className="text-center space-y-2 p-4 bg-gray-50 rounded-xl">
