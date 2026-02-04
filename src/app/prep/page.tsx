@@ -7,9 +7,17 @@ import { StepReason } from "@/components/wizard/step-reason";
 import { StepExample } from "@/components/wizard/step-example";
 import { StepPointRe } from "@/components/wizard/step-point-re";
 import { FeedbackView } from "@/components/feedback/feedback-view";
+import { ModeSelection } from "@/components/prep/mode-selection";
+import { HomeButton } from "@/components/common/home-button";
+import { useEffect } from "react";
 
 export default function PrepPage() {
-    const { currentStep } = usePrepStore();
+    const { currentStep, mode, setMode, reset } = usePrepStore();
+
+    useEffect(() => {
+        // Reset state on mount to force selection
+        reset();
+    }, [reset]);
 
     const getStepContent = () => {
         switch (currentStep) {
@@ -52,10 +60,29 @@ export default function PrepPage() {
         }
     };
 
+    if (!mode) {
+        return (
+            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 relative">
+                <HomeButton />
+                <div className="w-full pt-32 pb-20">
+                    <ModeSelection onSelect={(m) => setMode(m)} />
+                </div>
+            </div>
+        );
+    }
+
     const { title, description, component } = getStepContent();
 
     return (
-        <WizardLayout title={title} description={description}>
+        <WizardLayout
+            title={title}
+            description={description}
+            pageTitle="PREP 트레이닝"
+            pageDescription={<>
+                PREP의 4단계를 하나씩 따라가며 논리적인 생각의 근육을 키워보세요.<br className="hidden sm:block" />
+                각 단계의 가이드를 통해 자연스럽게 <span className="font-bold text-trust-navy">PREP</span> 구조를 체득할 수 있습니다.
+            </>}
+        >
             {component}
         </WizardLayout>
     );

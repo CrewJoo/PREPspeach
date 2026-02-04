@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { PrepQuestion } from './constants';
 
 interface PrepData {
     point1: string;
@@ -7,11 +8,17 @@ interface PrepData {
     point2: string;
 }
 
+export type PrepMode = 'INTERVIEW' | 'WORK' | null;
+
 interface PrepStore {
     currentStep: number;
+    mode: PrepMode;
     data: PrepData;
+    question: PrepQuestion | null;
     setStep: (step: number) => void;
+    setMode: (mode: PrepMode) => void;
     updateData: (data: Partial<PrepData>) => void;
+    setQuestion: (q: PrepQuestion | null) => void;
     reset: () => void;
 }
 
@@ -24,9 +31,13 @@ const initialData: PrepData = {
 
 export const usePrepStore = create<PrepStore>((set) => ({
     currentStep: 1,
+    mode: null,
     data: initialData,
+    question: null,
     setStep: (step) => set({ currentStep: step }),
+    setMode: (mode) => set({ mode }),
     updateData: (newData) =>
         set((state) => ({ data: { ...state.data, ...newData } })),
-    reset: () => set({ currentStep: 1, data: initialData }),
+    setQuestion: (q) => set({ question: q }),
+    reset: () => set({ currentStep: 1, mode: null, data: initialData, question: null }),
 }));

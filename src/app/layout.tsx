@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Use Inter instead of Geist
 import "./globals.css";
+import { MainNav } from "@/components/common/main-nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
+        <MainNav />
         {children}
       </body>
     </html>
