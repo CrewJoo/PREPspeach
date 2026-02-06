@@ -3,15 +3,22 @@ import { Briefcase, GraduationCap } from "lucide-react";
 
 interface ModeSelectionProps {
     onSelect: (mode: 'INTERVIEW' | 'WORK') => void;
+    title?: string;
+    subtitle?: string;
 }
 
-export function ModeSelection({ onSelect }: ModeSelectionProps) {
+export function ModeSelection({ onSelect, title, subtitle }: ModeSelectionProps) {
     return (
         <div className="w-full max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-trust-navy text-center mb-12">
-                어떤 상황을 준비하고 계신가요?
+            <h2 className="text-3xl font-bold text-trust-navy text-center mb-4">
+                {title || "어떤 상황을 준비하고 계신가요?"}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {subtitle && (
+                <p className="text-xl text-slate-500 text-center mb-12">
+                    {subtitle}
+                </p>
+            )}
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 ${!subtitle ? "mt-12" : ""}`}>
                 {/* Interview Mode */}
                 <motion.button
                     whileHover={{ scale: 1.03 }}

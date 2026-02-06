@@ -10,6 +10,7 @@ import { HomeButton } from "@/components/common/home-button";
 import { QUESTIONS_INTERVIEW, QUESTIONS_WORK, PrepQuestion } from "@/lib/constants";
 import { ModeSelection } from "@/components/prep/mode-selection";
 import { usePrepStore } from "@/lib/store";
+import { motion } from "framer-motion";
 
 // Define the schema to match the API (for type inference if needed, though useObject handles partials)
 const prepSchema = z.object({
@@ -52,10 +53,40 @@ export default function TransformPage() {
 
     if (!mode) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 relative">
+            <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
                 <HomeButton />
-                <div className="w-full pt-32 pb-20">
-                    <ModeSelection onSelect={(m) => setMode(m)} />
+
+                <div className="max-w-6xl mx-auto px-6 pt-32">
+                    {/* Header */}
+                    <div className="text-center mb-16 space-y-6">
+                        <motion.h1
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-4xl sm:text-6xl font-black text-trust-navy tracking-tight"
+                        >
+                            PREP 변환기
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-xl text-slate-600 max-w-3xl mx-auto break-keep leading-relaxed"
+                        >
+                            <span className="text-trust-navy font-bold">PREP 변환기</span>는 두서없이 떠오르는 아이디어를 즉시 논리 정연한 구조로 재탄생시키는 지능형 도구입니다.<br className="hidden sm:block" />
+                            복잡한 생각이나 거친 메모를 입력하면, AI가 핵심 의도를 파악하여 <span className="text-trust-navy font-bold">PREP 공식</span>에 맞는 깔끔한 보고서로 변환해드립니다.
+                        </motion.p>
+                    </div>
+
+                    <div className="max-w-4xl mx-auto text-center mb-8">
+                        <span className="inline-block py-1 px-3 rounded-full bg-slate-100 text-slate-600 text-sm font-bold mb-2 border border-slate-200">
+                            MODE SELECT
+                        </span>
+                    </div>
+
+                    <ModeSelection
+                        onSelect={(m) => setMode(m)}
+                        title="어떤 상황을 변환하시겠습니까?"
+                    />
                 </div>
             </div>
         );

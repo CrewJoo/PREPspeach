@@ -29,8 +29,8 @@ export default function PrepPromptPage() {
                         transition={{ delay: 0.1 }}
                         className="text-xl text-slate-600 max-w-3xl mx-auto break-keep leading-relaxed"
                     >
-                        AI의 잠재력을 100% 깨우는 데는 복잡한 코딩이 필요 없습니다.<br className="hidden sm:block" />
-                        명확한 생각의 공식, <span className="font-bold text-trust-navy">PREP</span> 하나면 충분합니다.
+                        <span className="text-trust-navy font-bold">PREP 프롬프트</span>는 AI에게 가장 정확한 지시를 내릴 수 있는 최적의 명령어 템플릿입니다.<br className="hidden sm:block" />
+                        복잡한 기술 없이도 Point(결론)-Reason(이유)-Example(예시)-Point(재강조) 구조만 적용하면, 누구나 <span className="text-trust-navy font-bold">전문가 수준의 답변</span>을 이끌어낼 수 있습니다.
                     </motion.p>
                 </div>
 

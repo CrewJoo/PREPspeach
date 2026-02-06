@@ -107,8 +107,8 @@ export const ABOUT_COPY = {
         subtitle: "논리적인 소통의 핵심 구조",
         desc: "Point(결론), Reason(이유), Example(사례), Point(재강조)의 4단계로 구성된 가장 강력한 스피치 프레임워크입니다.",
     },
-    aisper: {
-        title: "PREP Aisper란?",
+    prep_prompt: {
+        title: "PREP 프롬프트란?",
         badge: "AI + Whisper (속삭이는 자) / Super (능가하는)",
         subtitle: "생각의 도구 PREP으로\n인공지능을 주도하는 논리 지휘자",
         desc: "AI를 다루는 '영적인 한 수'를 가진,\nAI라는 거대한 시스템에게 영감을 불어넣는 사람",

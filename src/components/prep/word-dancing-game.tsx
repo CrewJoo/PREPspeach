@@ -123,28 +123,39 @@ export function WordDancingGame({ level }: WordDancingGameProps) {
     const onDropToTarget = (index: number) => {
         if (!draggedItem) return;
 
-        // Remove from source if it was there
-        if (sourceItems.some(i => i.id === draggedItem.id)) {
-            setSourceItems(prev => prev.filter(i => i.id !== draggedItem.id));
+        // 1. Calculate Next Source & Target State
+        let nextSourceItems = [...sourceItems];
+        const nextTargetItems = [...targetItems];
+
+        // A. Remove draggedItem from its original location
+        const sourceIndex = nextSourceItems.findIndex(i => i.id === draggedItem.id);
+        if (sourceIndex !== -1) {
+            // It was in Source
+            nextSourceItems.splice(sourceIndex, 1);
+        } else {
+            // It might be in Target
+            const existingTargetIndex = nextTargetItems.findIndex(i => i?.id === draggedItem.id);
+            if (existingTargetIndex !== -1) {
+                nextTargetItems[existingTargetIndex] = null;
+            }
         }
 
-        // Remove from other target slot if it was there
-        const existingTargetIndex = targetItems.findIndex(i => i?.id === draggedItem.id);
-        if (existingTargetIndex !== -1) {
-            const newTargets = [...targetItems];
-            newTargets[existingTargetIndex] = null;
-            setTargetItems(newTargets);
+        // B. Handle Collision at Destination
+        if (nextTargetItems[index]) {
+            // If slot occupied, return the OCCUPANT to Source
+            const occupant = nextTargetItems[index];
+            // Ensure we don't duplicate if something weird happened, though logic shouldn't allow it
+            if (!nextSourceItems.some(i => i.id === occupant!.id)) {
+                nextSourceItems.push(occupant!);
+            }
         }
 
-        // Place in new slot
-        const newTargets = [...targetItems];
-        // If slot occupied, swap? or just return to source?
-        // Let's returns the occupant to source to avoid deleting.
-        if (newTargets[index]) {
-            setSourceItems(prev => [...prev, newTargets[index]!]);
-        }
-        newTargets[index] = draggedItem;
-        setTargetItems(newTargets);
+        // C. Place Dragged Item
+        nextTargetItems[index] = draggedItem;
+
+        // D. Atomic Update
+        setSourceItems(nextSourceItems);
+        setTargetItems(nextTargetItems);
         setDraggedItem(null);
     };
 
@@ -165,7 +176,7 @@ export function WordDancingGame({ level }: WordDancingGameProps) {
     const tabs = WORD_DANCING_DATA.map((d) => ({
         id: d.level,
         label: `Level ${d.level}`,
-        href: `/prep/step${d.level}`,
+        href: `/prep-training/step${d.level}`,
     }));
 
     if (!isMounted) return null; // Avoid hydration mismatch
@@ -175,7 +186,7 @@ export function WordDancingGame({ level }: WordDancingGameProps) {
             {/* Level Navigation */}
             <div className="flex justify-center mb-4">
                 <div className="flex gap-2 bg-slate-100 p-1.5 rounded-xl items-center">
-                    <Link href="/prep/word-dancing">
+                    <Link href="/prep-word-dancing">
                         <div className="px-6 py-2.5 rounded-lg font-bold text-sm text-slate-500 hover:text-trust-navy hover:bg-slate-200/50 transition-all flex items-center gap-2">
                             워드댄싱
                         </div>
@@ -290,6 +301,7 @@ export function WordDancingGame({ level }: WordDancingGameProps) {
                             )}>
                                 {targetItems[index] ? (
                                     <motion.div
+                                        key={targetItems[index]!.id}
                                         layoutId={targetItems[index]!.id}
                                         draggable={!isChecked}
                                         onDragStart={() => !isChecked && setDraggedItem(targetItems[index]!)}

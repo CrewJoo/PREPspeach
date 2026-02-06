@@ -24,8 +24,9 @@ export default function AboutPrepPage() {
                     <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-trust-navy mb-6">
                         PREP이란?
                     </h1>
-                    <p className="text-xl sm:text-2xl text-slate-600 font-medium">
-                        가장 강력하고 간결한 논리적 소통의 핵심 구조
+                    <p className="text-xl text-slate-600 max-w-3xl mx-auto break-keep leading-relaxed">
+                        PREP은 단순한 말하기 기법이 아닌, <br className="hidden sm:block" />복잡한 머릿속을 가장 명료하게 정렬하는 강력한<span className="text-trust-navy font-bold">'생각의 공식'</span>입니다.<br className="hidden sm:block" />
+                        <span className="text-trust-navy font-bold">Point-Reason-Example-Point</span>로 이어지는 4단계 완벽한 논리 구조를 통해, <br className="hidden sm:block" />당신의 직관을 확신으로 바꾸고 상대를 매혹하는 커뮤니케이션의 정수를 경험하세요.
                     </p>
                 </div>
 
@@ -111,7 +112,7 @@ export default function AboutPrepPage() {
                     </div>
 
                     <div className="mt-12">
-                        <Link href="/prep/word-dancing">
+                        <Link href="/prep-word-dancing">
                             <Button size="lg" className="bg-trust-navy text-white hover:bg-trust-navy/90 font-bold px-12 h-16 text-xl rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all ring-4 ring-trust-navy/10">
                                 'PREP 워드댄싱' 체험하기
                             </Button>

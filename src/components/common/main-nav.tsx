@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ProgramGuideModal } from "@/components/common/program-guide-modal";
 import { useHomeStore } from "@/store/use-home-store";
+import { useInterviewStore } from "@/lib/interview-store";
 import { Menu, X } from "lucide-react";
 
 export function MainNav() {
@@ -13,11 +14,21 @@ export function MainNav() {
     const pathname = usePathname();
     const router = useRouter();
     const { viewMode, setViewMode } = useHomeStore();
+    // ...
+    // (Skipping unchanged parts)
+    // ...
+    <Link
+        href="/prep-interview"
+        className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap"
+        onClick={() => useInterviewStore.getState().reset()}
+    >
+        PREP 면접관
+    </Link>
 
     // Logic: Hide Logo on Main Page (AI/Interview modes) and Subpages (About/Transform),
     // but KEEEP it on '/prep' based on user request ("Except PREP training places").
     const isHome = pathname === '/';
-    const isTrainingPlace = pathname.startsWith('/prep') || pathname.startsWith('/about') || pathname.startsWith('/transform');
+    const isTrainingPlace = pathname.startsWith('/prep') || pathname.startsWith('/about');
     // If we are on the home page, only show if in intro mode (because other modes have their own header?)
     // Actually, user wants "PREP 생각의 공식" on left when menu items clicked.
     // The menu items lead to subpages.
@@ -54,14 +65,17 @@ export function MainNav() {
                         <Link href="/about/prep" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
                             PREP이란?
                         </Link>
-                        <Link href="/prep/word-dancing" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
+                        <Link href="/prep-word-dancing" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
                             PREP 워드댄싱
                         </Link>
-                        <Link href="/prep" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
+                        <Link href="/prep-training" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
                             PREP 트레이닝
                         </Link>
-                        <Link href="/transform" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
+                        <Link href="/prep-transform" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
                             PREP 변환기
+                        </Link>
+                        <Link href="/prep-interview" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
+                            PREP 면접관
                         </Link>
                         <Link href="/prep-prompt" className="text-sm font-bold text-slate-700 hover:text-trust-navy transition-colors whitespace-nowrap">
                             PREP 프롬프트
@@ -97,25 +111,35 @@ export function MainNav() {
                         PREP이란?
                     </Link>
                     <Link
-                        href="/prep/word-dancing"
+                        href="/prep-word-dancing"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="text-lg font-bold text-slate-700 hover:text-trust-navy py-2"
                     >
                         PREP 워드댄싱
                     </Link>
                     <Link
-                        href="/prep"
+                        href="/prep-training"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="text-lg font-bold text-slate-700 hover:text-trust-navy py-2"
                     >
                         PREP 트레이닝
                     </Link>
                     <Link
-                        href="/transform"
+                        href="/prep-transform"
                         onClick={() => setIsMobileMenuOpen(false)}
                         className="text-lg font-bold text-slate-700 hover:text-trust-navy py-2"
                     >
                         PREP 변환기
+                    </Link>
+                    <Link
+                        href="/prep-interview"
+                        onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            useInterviewStore.getState().reset();
+                        }}
+                        className="text-lg font-bold text-slate-700 hover:text-trust-navy py-2"
+                    >
+                        PREP 면접관
                     </Link>
                     <Link
                         href="/prep-prompt"

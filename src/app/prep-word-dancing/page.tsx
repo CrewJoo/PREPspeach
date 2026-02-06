@@ -25,7 +25,7 @@ export default function WordDancingPage() {
             title: "Level 1: P와 R 구분하기",
             desc: "직관적으로 결론(Point)과 이유(Reason)를 구분하는 감각을 익힙니다.",
             icon: <CheckCircle2 className="h-8 w-8 text-purple-300" />,
-            link: "/prep/step1",
+            link: "/prep-training/step1",
             active: true
         },
         {
@@ -33,7 +33,7 @@ export default function WordDancingPage() {
             title: "Level 2: P, R, E 정리하기 -1",
             desc: "핵심 요소를 3가지 덩어리로 분류하는 기초 훈련입니다.",
             icon: <ListOrdered className="h-8 w-8 text-purple-500" />,
-            link: "/prep/step2",
+            link: "/prep-training/step2",
             active: true
         },
         {
@@ -41,7 +41,7 @@ export default function WordDancingPage() {
             title: "Level 3: P, R, E 정리하기 -2",
             desc: "복잡한 문장에서 P-R-E 구조를 찾아내는 심화 훈련입니다.",
             icon: <Sparkles className="h-8 w-8 text-purple-700" />,
-            link: "/prep/step3",
+            link: "/prep-training/step3",
             active: true
         },
         {
@@ -49,7 +49,7 @@ export default function WordDancingPage() {
             title: "Level 4: P, R, E, P' 완성하기",
             desc: "완벽한 4단 논법으로 당신의 생각을 구조화해보세요.",
             icon: <Music className="h-8 w-8 text-purple-900" />,
-            link: "/prep/step4",
+            link: "/prep-training/step4",
             active: true
         }
     ].map(step => {
@@ -76,8 +76,9 @@ export default function WordDancingPage() {
                         <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-trust-navy">
                             PREP 워드 댄싱
                         </h1>
-                        <p className="text-xl text-slate-600 mt-6 md:mt-0 max-w-3xl mx-auto break-keep leading-relaxed">
-                            생각의 리듬을 타며 논리를 완성하는 4단계 훈련
+                        <p className="text-xl text-slate-600 mt-8 md:mt-10 max-w-3xl mx-auto break-keep leading-relaxed">
+                            <span className="text-trust-navy font-bold">워드 댄싱</span>은 흩어진 문장 조각들을 조립하며 <br className="hidden sm:block" />PREP(논리의 흐름)을 감각적으로 익히는 게임형 훈련입니다.
+                            <br className="hidden sm:block" />Level 1의 단순 구분부터 Level 4의 완성형 구조까지, <br className="hidden sm:block" />단계별 미션을 클리어하며 <span className="text-trust-navy font-bold">PREP 구조</span>가 몸에 배도록 연습해보세요.
                         </p>
                     </motion.div>
                 </div>

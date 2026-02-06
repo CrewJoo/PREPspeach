@@ -188,19 +188,19 @@ export default function Home() {
                 <span className="block sm:inline">{renderTitle(LANDING_COPY.hero_intro.title)}</span>
               </motion.h1>
 
-              <motion.div variants={itemVariants} className="mt-8 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                <Link href="/about/prep" className="w-full sm:w-auto">
-                  <Button size="lg" className="h-16 w-full sm:w-auto px-10 bg-success-green text-xl font-bold hover:bg-success-green/90 shadow-xl shadow-success-green/20 transition-all hover:scale-105">
-                    PREP이란?
-                    <ArrowRight className="ml-2 h-6 w-6" />
-                  </Button>
-                </Link>
-                <Link href="/about/aisper" className="w-full sm:w-auto">
-                  <Button size="lg" className="h-16 w-full sm:w-auto px-10 bg-purple-900 text-xl font-bold text-white hover:bg-purple-800 shadow-xl transition-all hover:scale-105">
-                    PREP 프롬프트
-                    <ArrowRight className="ml-2 h-6 w-6" />
-                  </Button>
-                </Link>
+              <motion.div variants={itemVariants} className="mt-8 flex">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/prep-training">
+                    <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg bg-trust-navy hover:bg-trust-navy/90 text-white rounded-full font-bold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1">
+                      PREP 트레이닝 시작하기
+                    </Button>
+                  </Link>
+                  <Link href="/prep-word-dancing">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-lg border-2 border-slate-200 text-slate-700 hover:border-trust-navy hover:text-trust-navy hover:bg-white rounded-full font-bold shadow-sm hover:shadow-md transition-all">
+                      워드 댄싱 게임하기
+                    </Button>
+                  </Link>
+                </div>
               </motion.div>
 
               {/* Program Guide Button */}
@@ -287,15 +287,23 @@ export default function Home() {
               </motion.p>
 
               <motion.div variants={itemVariants} className="mt-8 flex w-full flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                <Link href="/prep" className="w-full sm:w-auto">
+                <Link href="/prep-training" className="w-full sm:w-auto">
                   <Button size="lg" className="h-16 w-full sm:w-80 bg-success-green text-xl font-bold hover:bg-success-green/90 shadow-xl shadow-success-green/20 transition-all hover:scale-105">
                     {LANDING_COPY.hero_practice.ctaStep}
                     <ArrowRight className="ml-2 h-6 w-6" />
                   </Button>
                 </Link>
-                <Link href="/transform" className="w-full sm:w-auto">
+                <Link href="/prep-transform" className="w-full sm:w-auto">
                   <Button size="lg" className="h-16 w-full sm:w-80 bg-purple-900 text-xl font-bold text-white hover:bg-purple-800 shadow-xl transition-all hover:scale-105">
                     {LANDING_COPY.hero_practice.ctaTransform}
+                    <ArrowRight className="ml-2 h-6 w-6" />
+                  </Button>
+                </Link>
+
+                {/* NEW: PREP Interviewer Button */}
+                <Link href="/prep-interview" className="w-full sm:w-auto">
+                  <Button size="lg" className="h-16 w-full sm:w-80 bg-trust-navy text-xl font-bold text-white hover:bg-trust-navy/90 shadow-xl transition-all hover:scale-105 border border-white/20">
+                    PREP AI 면접관
                     <ArrowRight className="ml-2 h-6 w-6" />
                   </Button>
                 </Link>
@@ -314,7 +322,7 @@ export default function Home() {
                 {LANDING_COPY.action.desc}
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
-                <Link href="/prep">
+                <Link href="/prep-training">
                   <Button size="lg" className="h-14 bg-success-green px-8 text-xl font-bold text-white hover:bg-success-green/90 shadow-2xl hover:shadow-success-green/50 hover:-translate-y-1 transition-all">
                     {LANDING_COPY.action.cta}
                     <ArrowRight className="ml-2 h-6 w-6" />

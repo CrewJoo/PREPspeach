@@ -10,6 +10,7 @@ import { FeedbackView } from "@/components/feedback/feedback-view";
 import { ModeSelection } from "@/components/prep/mode-selection";
 import { HomeButton } from "@/components/common/home-button";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function PrepPage() {
     const { currentStep, mode, setMode, reset } = usePrepStore();
@@ -62,10 +63,40 @@ export default function PrepPage() {
 
     if (!mode) {
         return (
-            <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 relative">
+            <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
                 <HomeButton />
-                <div className="w-full pt-32 pb-20">
-                    <ModeSelection onSelect={(m) => setMode(m)} />
+
+                <div className="max-w-6xl mx-auto px-6 pt-32">
+                    {/* Header */}
+                    <div className="text-center mb-16 space-y-6">
+                        <motion.h1
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-4xl sm:text-6xl font-black text-trust-navy tracking-tight"
+                        >
+                            PREP 트레이닝
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-xl text-slate-600 max-w-3xl mx-auto break-keep leading-relaxed"
+                        >
+                            <span className="text-trust-navy font-bold">PREP 트레이닝</span>은 당신의 생각을 가장 논리적인 구조로 다듬어주는 실전 훈련 파트너입니다.<br className="hidden sm:block" />
+                            <span className="text-trust-navy font-bold">4단계 가이드</span>를 따라 핵심 주장을, 타당한 근거, 생생한 사례를 연결하다 보면 어느새 설득력 있는 답변이 완성됩니다.
+                        </motion.p>
+                    </div>
+
+                    <div className="max-w-4xl mx-auto text-center mb-8">
+                        <span className="inline-block py-1 px-3 rounded-full bg-slate-100 text-slate-600 text-sm font-bold mb-2 border border-slate-200">
+                            MODE SELECT
+                        </span>
+                    </div>
+
+                    <ModeSelection
+                        onSelect={(m) => setMode(m)}
+                        title="어떤 상황을 연습하고 싶으신가요?"
+                    />
                 </div>
             </div>
         );
