@@ -1,15 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
+import { useState } from "react";
+import { PromptExampleModal, PromptExampleType } from "@/components/prep/prompt-example-modal";
 
 export default function AboutAisperPage() {
+    const [activeExample, setActiveExample] = useState<PromptExampleType | null>(null);
+
     const concepts = [
         {
             title: "Meta Prompt",
             subtitle: "메타 프롬프트란?",
             desc: "AI에게 단순히 답을 구하는 것이 아니라, '어떻게 생각해야 하는지' 사고의 틀을 먼저 제시하는 최상위 명령어입니다. AI의 페르소나, 목표, 출력 형식을 정의하여 답변의 품질을 결정짓는 설계도와 같습니다.",
-            prep: "PREP 구조는 AI에게 가장 명확한 '사고의 가드레일'을 제공합니다. 'Point(결론)'로 역할을 정의하고, 'Reason(이유)'으로 사고 방향을 설정하며, 'Example(예시)'로 출력 톤앤매너를 학습시키면 AI가 환각 없이 정확한 답변을 생성합니다."
+            prep: "PREP 구조는 AI에게 가장 명확한 '사고의 가드레일'을 제공합니다. 'Point(결론)'로 역할을 정의하고, 'Reason(이유)'으로 사고 방향을 설정하며, 'Example(예시)'로 출력 톤앤매너를 학습시키면 AI가 환각 없이 정확한 답변을 생성합니다.",
         },
         {
             title: "RAG",
@@ -21,7 +25,7 @@ export default function AboutAisperPage() {
             title: "Context Engineering",
             subtitle: "컨텍스트 엔지니어링이란?",
             desc: "AI가 사용자의 상황과 의도를 정확히 이해하도록 배경 정보를 논리적으로 주입하는 기술입니다. 단순히 많은 정보를 주는 것이 아니라, AI가 이해하기 쉬운 순서와 구조로 문맥을 최적화하는 과정입니다.",
-            prep: "긴 문맥을 던져줄 때 AI는 종종 핵심을 놓칩니다. PREP은 복잡한 상황을 '핵심 주장(P) - 배경 원인(R) - 구체적 정황(E)'으로 쪼개어 전달하게 해줍니다. 이 구조화된 컨텍스트는 AI가 긴 문맥 속에서도 길을 잃지 않게 돕습니다."
+            prep: "긴 문맥을 던져줄 때 AI는 종종 핵심을 놓칩니다. PREP은 복잡한 상황을 '핵심 주장(P) - 배경 원인(R) - 구체적 정황(E)'으로 쪼개어 전달하게 해줍니다. 이 구조화된 컨텍스트는 AI가 긴 문맥 속에서도 길을 잃지 않고 모든 정보를 유기적으로 연결하여 이해하게 됩니다."
         },
         {
             title: "Slow Thinking",
@@ -33,7 +37,7 @@ export default function AboutAisperPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center p-6 relative">
-            <HomeButton />
+            {/* <HomeButton /> */}
 
             <div className="max-w-5xl w-full pt-12 pb-20">
 
@@ -119,6 +123,12 @@ export default function AboutAisperPage() {
                 </motion.div>
 
             </div>
+
+            <PromptExampleModal
+                isOpen={!!activeExample}
+                onClose={() => setActiveExample(null)}
+                type={activeExample}
+            />
         </div>
     );
 }

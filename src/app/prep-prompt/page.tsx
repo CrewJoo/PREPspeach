@@ -1,6 +1,6 @@
 "use client";
 
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
 import { motion } from "framer-motion";
 import { PromptExampleModal, PromptExampleType } from "@/components/prep/prompt-example-modal";
 import { useState } from "react";
@@ -10,7 +10,7 @@ export default function PrepPromptPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
-            <HomeButton />
+            {/* <HomeButton /> */}
 
             <div className="max-w-6xl mx-auto px-6 pt-32">
 

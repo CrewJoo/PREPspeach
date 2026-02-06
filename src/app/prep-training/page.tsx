@@ -8,7 +8,7 @@ import { StepExample } from "@/components/wizard/step-example";
 import { StepPointRe } from "@/components/wizard/step-point-re";
 import { FeedbackView } from "@/components/feedback/feedback-view";
 import { ModeSelection } from "@/components/prep/mode-selection";
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 
@@ -64,7 +64,7 @@ export default function PrepPage() {
     if (!mode) {
         return (
             <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
-                <HomeButton />
+                {/* <HomeButton /> */}
 
                 <div className="max-w-6xl mx-auto px-6 pt-32">
                     {/* Header */}

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { HomeButton } from "@/components/common/home-button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Music, CheckCircle2, ListOrdered, Sparkles } from "lucide-react";
@@ -65,7 +64,6 @@ export default function WordDancingPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center p-6 relative">
-            <HomeButton />
 
             <div className="max-w-5xl w-full pt-32 pb-20">
                 <div className="text-center mb-16 space-y-6">

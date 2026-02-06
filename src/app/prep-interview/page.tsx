@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { useInterviewStore } from "@/lib/interview-store";
 import { ModeSelection } from "@/components/prep/mode-selection";
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
 import { InterviewWizard } from "@/components/interview/interview-wizard";
 import { AnalysisResult } from "@/components/interview/analysis-result";
 import { motion, AnimatePresence } from "framer-motion";
@@ -35,7 +35,7 @@ export default function PrepInterviewPage() {
     if (!mode) {
         return (
             <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
-                <HomeButton />
+                {/* <HomeButton /> */}
 
                 <div className="max-w-6xl mx-auto px-6 pt-32">
                     {/* Header */}
@@ -115,7 +115,7 @@ export default function PrepInterviewPage() {
 
     return (
         <div className="min-h-screen bg-white relative pb-20 p-6">
-            <HomeButton />
+            {/* <HomeButton /> */}
 
             <div className="max-w-5xl mx-auto px-4 pt-28">
                 {/* Header Area */}

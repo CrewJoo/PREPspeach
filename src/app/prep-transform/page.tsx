@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Sparkles, AlertCircle } from "lucide-react";
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
 import { QUESTIONS_INTERVIEW, QUESTIONS_WORK, PrepQuestion } from "@/lib/constants";
 import { ModeSelection } from "@/components/prep/mode-selection";
 import { usePrepStore } from "@/lib/store";
@@ -45,7 +45,7 @@ export default function TransformPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim()) return;
-        submit({ input });
+        submit({ input, question: question?.q } as any);
     };
 
     // 'object' contains the partial object as it streams in
@@ -54,7 +54,7 @@ export default function TransformPage() {
     if (!mode) {
         return (
             <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
-                <HomeButton />
+                {/* <HomeButton /> */}
 
                 <div className="max-w-6xl mx-auto px-6 pt-32">
                     {/* Header */}
@@ -94,7 +94,7 @@ export default function TransformPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
-            <HomeButton />
+            {/* <HomeButton /> */}
 
             <div className="max-w-7xl mx-auto px-6 pt-32">
                 {/* Header */}
@@ -206,10 +206,10 @@ export default function TransformPage() {
                                         </div>
 
                                         <div className="mt-8 border-t pt-6">
-                                            <h3 className="mb-4 text-xl font-bold text-success-green flex items-center gap-2">
-                                                <Sparkles className="h-5 w-5" /> AI 코칭 조언
+                                            <h3 className="mb-4 text-xl font-bold text-orange-600 flex items-center gap-2">
+                                                <Sparkles className="h-5 w-5" /> AI 직설 코칭 (쓴소리)
                                             </h3>
-                                            <p className="text-gray-700 text-lg leading-relaxed bg-green-50 p-6 rounded-xl border border-green-100 shadow-sm">
+                                            <p className="text-gray-700 text-lg leading-relaxed bg-orange-50 p-6 rounded-xl border border-orange-100 shadow-sm">
                                                 {parsedData.advice}
                                             </p>
                                         </div>

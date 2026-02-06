@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
 
 export default function AboutPrepPage() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col items-center p-6 relative">
-            <HomeButton />
+            {/* <HomeButton /> */}
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

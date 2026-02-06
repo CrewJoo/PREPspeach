@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePrepStore } from "@/lib/store";
 import { QUESTIONS_INTERVIEW, QUESTIONS_WORK } from "@/lib/constants";
 
-import { HomeButton } from "@/components/common/home-button";
+// import { HomeButton } from "@/components/common/home-button";
 
 interface WizardLayoutProps {
     children: ReactNode;
@@ -28,7 +28,7 @@ export function WizardLayout({ children, title, description, pageTitle, pageDesc
 
     return (
         <div className="min-h-screen bg-slate-50 relative pb-20 p-6">
-            <HomeButton />
+            {/* <HomeButton /> */}
 
             <div className="max-w-6xl mx-auto px-6 pt-32">
                 {/* Page Header (Optional) - Global Page Title */}
